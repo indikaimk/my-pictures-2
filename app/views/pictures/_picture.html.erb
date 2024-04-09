@@ -3,5 +3,10 @@
     <strong>Title:</strong>
     <%= picture.title %>
   </p>
+  <div>
+    <% if picture.filename.attached? %>
+      <%= image_tag rails_storage_proxy_path picture.filename %>
+    <%  end %>
+  </div>
 
 </div>

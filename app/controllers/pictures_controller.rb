@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   before_action :set_picture, only: %i[ show edit update destroy ]
-  before_action :require_signin
+  before_action :require_signin, only: [:new, :create]
   
   # GET /pictures or /pictures.json
   def index
@@ -66,11 +66,11 @@ class PicturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def picture_params
-      params.require(:picture).permit(:title)
+      params.require(:picture).permit(:title, :filename)
     end
     
     def require_signin
-      if !signed_in?
+      if !helpers.signed_in?
         redirect_to '/signin'
       end
     end
